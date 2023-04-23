@@ -11,7 +11,7 @@ public class Main {
     }
 
     public static void task1 () {
-        System.out.println("Задача 8 (сумма годовых накоплений) ");
+        System.out.println("Задача 1 (сумма годовых накоплений) ");
         /*  сколько месяцев потребуется, чтобы накопить 2 459 000 рублей при условии,
          что первоначально мы имеем 0 рублей и готовы откладывать по 15 тысяч рублей.
          «Месяц …, сумма накоплений равна … рублей»
@@ -21,14 +21,14 @@ public class Main {
         int contribution = 15_000;// объявляем доход
         int month = 0 ;
 
-        while (accumulation <= 2_459_000){
+        while (accumulation < 2_459_000){
 
             accumulation = accumulation +contribution;
             month++ ;
             System.out.println( "Месяц  "+month+", сумма накоплений равна "+accumulation+ "  рублей");
         }
         month++;
-        accumulation = accumulation +contribution;// необходимо прибавить еще один месяц, чтобы вышло чуть больше 2_459_000
+//        accumulation = accumulation +contribution;// необходимо прибавить еще один месяц, чтобы вышло чуть больше 2_459_000
 
         System.out.println( "Месяц  "+month+", сумма накоплений равна "+accumulation+ "  рублей");
         System.out.println("_____________________________________");
@@ -67,18 +67,15 @@ public class Main {
          В консоль выведите результат операции на каждый год в формате:
          «Год …, численность населения составляет …».
          */
-
+        //В третьей задаче нужно внести корректировки в формулы расчета числа населения.
         int population = 12_000_000;// население
         int birthRate = 17;//рождаемость
         int mortality = 8;//сметрность
-        int growth = birthRate - mortality; // прирост
         int valueGrowth = 1_000;
 
-        int valueGrowthYear = population/valueGrowth*growth;// прирост за год
-
         for (int i = 1; i <= 10 ; i++){
-            System.out.println("Год "+i+", численность населения составляет "+valueGrowthYear+".");
-            valueGrowthYear = valueGrowthYear + valueGrowthYear;
+            population = population + (birthRate-mortality)*population/valueGrowth;
+            System.out.println("Год "+i+", численность населения составляет "+population+".");
         }
         System.out.println("_____________________________________");
     }
@@ -94,19 +91,14 @@ public class Main {
         а всегда равен 7%.
         Выведите в консоль результат программы с указанием суммы накоплений по каждому месяцу.*/
 
-        int initialСapital = 15_000;// первоначальная сумма вклада
+        int capital = 15_000;// первоначальная сумма вклада
         int percent = 7;//процент начисления
-        int capital = 0;
+
 
         for (int i = 1; capital < 12_000_000 ; i++){
-
-            capital = capital + initialСapital;//вкладываем  15_000 т
-            int capitalPercent = capital*percent/100;//вычисляем процент от новой суммы
-            capital = capital + capitalPercent;//получаем итог для следующего месяцца
-
+            capital = capital+ capital*percent/100;//
             System.out.println("Месяц "+i+", сумма накоплений равна "+capital+".");
         }
-
         System.out.println("_____________________________________");
     }
 
@@ -119,15 +111,11 @@ public class Main {
          накопления за 6, 12, 18, 24-й и следующие месяцы.
          */
 
-        int initialСapital = 15_000;// первоначальная сумма вклада
+        int capital = 15_000;// первоначальная сумма вклада
         int percent = 7;//процент начисления
-        int capital = 0;
 
         for (int i = 1; capital < 12_000_000 ; i++){
-
-            capital = capital + initialСapital;//вкладываем  15_000 т
-            int capitalPercent = capital*percent/100;//вычисляем процент от новой суммы
-            capital = capital + capitalPercent;//получаем итог для следующего месяцца
+            capital = capital + capital*percent/100;//получаем итог для следующего месяцца
 
             if (i % 6 == 0){
                 System.out.println("Месяц "+i+", сумма накоплений равна "+capital+".");
@@ -145,17 +133,13 @@ public class Main {
          Исходная сумма всё та же — 15 тысяч рублей, проценты банка – 7% ежемесячно.
          Напишите программу, которая будет выводить сумму накоплений за каждые полгода в течение 9 лет*/
 
-        int initialСapital = 15_000;// первоначальная сумма вклада
+        int  capital = 15_000;// первоначальная сумма вклада
         int percent = 7;//процент начисления
-        int capital = 0;
         int year = 9;
-        //System.out.println(year*12);// 9 лет это 108 месяцев
+
         for (int i = 1; i <= year*12; i++){
 
-                capital = capital + initialСapital;//вкладываем  15_000 т
-                int capitalPercent = capital * percent / 100;//вычисляем процент от новой суммы
-                capital = capital + capitalPercent;//получаем итог для следующего месяцца
-
+            capital = capital + capital * percent / 100;
                 if (i % 6 == 0) {
                     System.out.println("Месяц " + i + ", сумма накоплений равна " + capital + ".");
                 }
@@ -177,10 +161,9 @@ public class Main {
 
     int friday = 5; // пусть пт будет 5 число
 
-        for (int i = 1; i <= 31 ; i++)
-            if (i % friday == 0){
-                System.out.println("Сегодня пятница,"+i+"-е число. Необходимо подготовить отчет");
-            }
+        for (int i = friday;  i <= 31 ; i = i + 7)
+
+            System.out.println("Сегодня пятница,"+i+"-е число. Необходимо подготовить отчет");
 
         System.out.println("_____________________________________");
     }
